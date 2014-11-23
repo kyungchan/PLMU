@@ -55,14 +55,88 @@ html{
 	color: white;
 }
 
+#cur-nav{
+	display: none;
+}
+
 #main-image{
 	width: 960px;
 	text-align: center;
 }
 
-#main-image h3, #main-image h5{
+#main-image h2, #main-image h4{
 	color: white;
 	position: relative;
 	top: -250px;	
-	text-shadow: 0 0 7px black;
+	text-shadow: 0 0 5px black;
 }
+
+.main-intro{
+	float: left;
+	text-align: center;
+	width: 320px;
+	height: 200px;
+}
+ 
+.main-intro i{
+	color: #54919C;
+}
+
+#piano{
+	width: 960px;
+	height: 300px;
+	border: 1px solid grey;
+}
+
+#pianostring{
+	display: none;
+}
+
+#pianokey{
+	padding: 0 50px;
+}
+
+#sharp{
+	position: relative;
+	top: -300px;
+	padding: 0 50px;
+}
+
+#sharp div:nth-child(1){
+	position: relative;
+	left: 30px;
+}
+#sharp div:nth-child(2){
+	position: relative;
+	left: 70px;
+}
+
+#sharp div:nth-child(3){
+	position: relative;
+	left: 230px;
+}
+
+#sharp div:nth-child(4){
+	position: relative;
+	left: 270px;
+}
+
+#sharp div:nth-child(5){
+	position: relative;
+	left: 310px;
+}
+
+.whitekey{
+	float: left;
+	width: 120px;
+	height: 300px;
+	border: 1px solid grey;
+}
+
+.blackkey{
+	float: left;
+	width: 80px;
+	height: 200px;
+	background-color: black;
+}
+

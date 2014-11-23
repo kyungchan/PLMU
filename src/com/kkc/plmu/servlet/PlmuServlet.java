@@ -29,12 +29,16 @@ public class PlmuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String op = request.getParameter("op");
+		String pg = request.getParameter("pg");
 		String actionUrl = "";
 		request.setCharacterEncoding("utf-8");
 		try {
-			if (op == null || op.equals("index")) {
+			if (pg == null || pg.equals("index")) {
 				actionUrl = "index.jsp";
+				request.setAttribute("current", "index");
+			} else if (pg.equals("play")) {
+				actionUrl = "play.jsp";
+				request.setAttribute("current", "play");
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
