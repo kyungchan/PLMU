@@ -2,6 +2,7 @@
 
 html{
 	padding-left: 50%;
+	font-family: "맑은 고딕", "Malgun Gothic", "굴림";
 	margin-left: -480px;
 }
 
@@ -16,10 +17,22 @@ html{
 	padding: 0;
 }
 
+.nav-ele{
+	display: table-cell;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+}
+
+.nav-active{
+	background-color: #44757d;
+}
+
 #nav {
 	background-color: #54919C;
 	width: 960px;
 	height: 40px;
+	margin-bottom: 10px;
 }
 
 #nav ul {
@@ -28,10 +41,8 @@ html{
 
 #nav ul li{
 	font-size: 16px;
-	font-family: "맑은 고딕", "Malgun Gothic", "굴림";
 	color: white;
 	float: left;
-	padding: 11px 20px 11px 0;
 }
 
 #nav ul li a{
@@ -42,4 +53,16 @@ html{
 #nav ul li a:visited{
 	text-decoration: none;
 	color: white;
+}
+
+#main-image{
+	width: 960px;
+	text-align: center;
+}
+
+#main-image h3, #main-image h5{
+	color: white;
+	position: relative;
+	top: -250px;	
+	text-shadow: 0 0 7px black;
 }
