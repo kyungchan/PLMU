@@ -41,7 +41,8 @@ public class PlmuServlet extends HttpServlet {
 				request.setAttribute("current", "play");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
+			actionUrl = "error.jsp";
+			request.setAttribute("errormsg", e.toString());
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(actionUrl);
