@@ -7,7 +7,6 @@
 <title>PLMU :: 악기연주</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/jquery.hotkeys-0.7.9.js"></script>
 <script src="js/core.js"></script>
 <script src="js/piano.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">

@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="piano">
+		<p id="piano-noti">현제 옥타브 : <span id="piano-octave">3</span><br>키보드 좌, 우키로 조절 (3~5)</p>
 	<div id="pianokey">
-		<div id="C" class="whitekey"></div>
-		<div id="D" class="whitekey"></div>
-		<div id="E" class="whitekey"></div>
-		<div id="F" class="whitekey"></div>
-		<div id="G" class="whitekey"></div>
-		<div id="A" class="whitekey"></div>
-		<div id="B" class="whitekey"></div>
+		<div id="C" class="whitekey">C<br>S</div>
+		<div id="D" class="whitekey">D<br>D</div>
+		<div id="E" class="whitekey">E<br>F</div>
+		<div id="F" class="whitekey">F<br>G</div>
+		<div id="G" class="whitekey">G<br>H</div>
+		<div id="A" class="whitekey">A<br>J</div>
+		<div id="B" class="whitekey">B<br>K</div>
 		<div id="sharp">
-			<div id="Cs" class="blackkey"></div>
-			<div id="Ds" class="blackkey"></div>
-			<div id="Fs" class="blackkey"></div>
-			<div id="Gs" class="blackkey"></div>
-			<div id="As" class="blackkey"></div>
+			<div id="Cs" class="blackkey">C#<br>E</div>
+			<div id="Ds" class="blackkey">D#<br>R</div>
+			<div id="Fs" class="blackkey">F#<br>Y</div>
+			<div id="Gs" class="blackkey">G#<br>U</div>
+			<div id="As" class="blackkey">A#<br>I</div>
 		</div>
 	</div>
 </div>
