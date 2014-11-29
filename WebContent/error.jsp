@@ -12,9 +12,12 @@
 <body>		
 	<jsp:include page="share/header.jsp"></jsp:include>
 	<jsp:include page="share/nav.jsp"></jsp:include>
-	<div id="container">
-		${errormsg}<br>
-		<a href="plmu" class="btn btn-default">돌아가기</a>
+	<div class="centered">
+		<div id="container">
+			${errormsg}<br>
+			<a href="plmu" class="btn btn-default">돌아가기</a>
+		</div>
+		<jsp:include page="share/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

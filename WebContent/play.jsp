@@ -27,6 +27,7 @@
 			</c:choose>
 			</div>
 		</div>
+		<jsp:include page="share/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>
