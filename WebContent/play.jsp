@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,11 @@
 		<jsp:include page="share/nav.jsp"></jsp:include>
 		<div id="container">
 			<div id="instrument">
-			<jsp:include page="instrument/piano.jsp"></jsp:include>
+			<c:choose>
+				<c:when test="${inst == 'piano'}">
+					<jsp:include page="instrument/piano.jsp"></jsp:include>
+				</c:when>
+			</c:choose>
 			</div>
 		</div>
 	</div>

@@ -12,6 +12,25 @@ function play_string(keyname){
 
 
 $(document).ready(function(){
+
+	$('.whitekey').mousedown(function(){
+		$(this).addClass('press_whitekey');
+		play_string($(this).attr("id"));
+	});
+
+	$('.whitekey').mouseup(function(){
+		$(this).removeClass('press_whitekey');
+	});
+
+	$('.blackkey').mousedown(function(){
+		$(this).addClass('press_blackkey');
+		play_string($(this).attr("id"));
+	});
+
+	$('.blackkey').mouseup(function(){
+		$(this).removeClass('press_blackkey');
+	});
+	
 	$(document).keydown(function(event){
 	switch(event.which){
 	case 83: //s
