@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <div id="nav">
-	<input id="cur-nav" type="text" value="${ current }">
+	<input class="hide" type="text" value="${ current }">
 	<ul>
 		<li>
 			<div id="nav-home" class="nav-ele">

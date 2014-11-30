@@ -1,9 +1,13 @@
 
 var Octave = 3;
 var Key_name = "";
+var recoding = false;
 
 function play_string(keyname){
 	Key_name="piano-" + Octave + keyname;
+	if(recoding == true){
+		$('#recoding').val($('#recoding').val() + Key_name + "," + $('#recode-time').val() + "|");
+	}
 	audio = document.getElementById(Key_name); 
 	audio.pause();
 	audio.currentTime = 0;
@@ -11,8 +15,40 @@ function play_string(keyname){
 }
 
 
-$(document).ready(function(){
+$(document).ready(function(){		
+	$("a[data-action='recode']").click(function() {
+		if (confirm("확인을 누르면 녹음이 시작됩니다.\n녹음은 7초동안 진행됩니다.")) {
+			var sec = 0, ms = 0;
+			recoding = true;
+			$("a[data-action='recode']").attr('disabled', true);
+			var startTime = new Date().getTime();
+			int = setInterval(function() {
+				var time = new Date().getTime();
+				var dif = time - startTime;
+				sec = Math.floor(dif / 10) / 100
 
+				if (sec < 7) {
+					$('#recode-time').val(sec);
+				} else {
+					$("a[data-action='recode']").attr('disabled', false);
+					recoding = false;
+					clearInterval(recodeTimer);
+				}
+			}, 1);
+
+			// var recoding = setInterval(function(){recodeTimer()},10);
+			// var recodeTime = 0;
+			// function recodeTimer() {
+			// if(recodeTime < 700){
+			// recodeTime++;
+			// $('#recode-time').val(recodeTime);
+			// } else {
+			// clearInterval(recodeTimer);
+			// }
+			// }
+		}
+		return false;
+	});
 	$('.whitekey').mousedown(function(){
 		$(this).addClass('press_whitekey');
 		play_string($(this).attr("id"));

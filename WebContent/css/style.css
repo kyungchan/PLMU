@@ -20,6 +20,10 @@ html{
 	float: left;
 }
 
+.hide{
+	display: none;
+}
+
 #header img {
 	display: block;
 	margin: 80px auto 0 auto;
@@ -64,10 +68,6 @@ html{
 	color: white;
 }
 
-#cur-nav{
-	display: none;
-}
-
 #main-image{
 	width: 960px;
 	text-align: center;
@@ -90,6 +90,15 @@ html{
 .main-intro i{
 	color: #54919C;
 }
+ 
+#recoder{
+	
+}
+ 
+#recode-time{
+	font-size: 18px;
+	width: 50px;
+}
 
 
 /* 피아노 CSS부분  */
@@ -101,10 +110,6 @@ html{
 
 #piano-noti{
 	text-align: center;
-}
-
-#pianostring{
-	display: none;
 }
 
 #pianokey{

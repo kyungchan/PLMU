@@ -20,7 +20,7 @@
 	</div>
 </div>
 
-<div id="pianostring">
+<div class="hide">
 	<audio id="piano-3C" preload="auto" controls>
 		<source src="audio/piano/3C.mp3" type="audio/mpeg"></source>
 	</audio>
