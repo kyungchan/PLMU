@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <div id="nav">
-	<input class="hide" type="text" value="${ current }">
+	<input id="cur-nav" class="hide" type="text" value="${ current }">
 	<ul>
 		<li>
 			<div id="nav-home" class="nav-ele">
@@ -17,7 +17,7 @@
 		</li>
 		<li>
 			<div id="nav-board"  class="nav-ele">
-				<a href="#">게시판</a>
+				<a href="plmu?pg=board">게시판</a>
 			</div>
 		</li>
 	</ul>

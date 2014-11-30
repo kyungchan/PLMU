@@ -35,17 +35,6 @@ $(document).ready(function(){
 					clearInterval(recodeTimer);
 				}
 			}, 1);
-
-			// var recoding = setInterval(function(){recodeTimer()},10);
-			// var recodeTime = 0;
-			// function recodeTimer() {
-			// if(recodeTime < 700){
-			// recodeTime++;
-			// $('#recode-time').val(recodeTime);
-			// } else {
-			// clearInterval(recodeTimer);
-			// }
-			// }
 		}
 		return false;
 	});

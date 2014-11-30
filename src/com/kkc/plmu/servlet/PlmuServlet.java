@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kkc.plmu.Article;
+import com.kkc.plmu.DAO;
+import com.kkc.plmu.PageResult;
+
 /**
  * Servlet implementation class PlmuServlet
  */
@@ -23,7 +27,16 @@ public class PlmuServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+	private int getIntFromParameter(String str, int defaultValue) {
+		int id;
+		
+		try {
+			id = Integer.parseInt(str);
+		} catch (Exception e) {
+			id = defaultValue;
+		}
+		return id;
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,6 +58,18 @@ public class PlmuServlet extends HttpServlet {
 				}
 				actionUrl = "play.jsp";
 				request.setAttribute("current", "play");
+			} else if(pg.equals("board")){
+				int page = getIntFromParameter(request.getParameter("page"), 1);
+				PageResult<Article> articles = DAO.getPage(page, 10);
+				request.setAttribute("articles", articles);
+				request.setAttribute("page", page);
+				request.setAttribute("current", "board");
+				actionUrl = "board.jsp";
+			} else if (pg.equals("show")) {
+				Article article = DAO.findById(Integer.parseInt(request.getParameter("id")));
+				request.setAttribute("article", article);
+				request.setAttribute("current", "board");
+				actionUrl = "show.jsp";
 			}
 		}catch (Exception e) {
 			actionUrl = "error.jsp";

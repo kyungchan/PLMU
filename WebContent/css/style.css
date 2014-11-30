@@ -6,6 +6,10 @@ html{
 	margin-left: -480px;
 }
 
+#container{
+	width: 960px;
+}
+
 #header {
 	width: 960px;
 	height: 160px;
@@ -175,4 +179,12 @@ html{
 	background-color: #8c8c8c;
 }
 
+/* 공유게시판 */
 
+#createbtn {
+	float: right;
+}
+
+.pagination-center{
+	text-align: center;
+}
