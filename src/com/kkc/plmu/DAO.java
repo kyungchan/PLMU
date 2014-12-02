@@ -21,7 +21,7 @@ public class DAO {
 		return (DataSource) envCtx.lookup("jdbc/WebDB");
 	}
 
-	public static Article findById(int id) throws SQLException, NamingException {
+	public static Article findArticleById(int id) throws SQLException, NamingException {
 		Article article = null;
 
 		Connection conn = null;
@@ -61,7 +61,7 @@ public class DAO {
 		return article;
 	}
 
-	public static boolean create(Article article) throws SQLException,
+	public static boolean Articlecreate(Article article) throws SQLException,
 			NamingException {
 		int result;
 		Connection conn = null;
@@ -101,7 +101,7 @@ public class DAO {
 		return (result == 1);
 	}
 	
-	public static boolean update(Article article) throws SQLException,
+	public static boolean Articleupdate(Article article) throws SQLException,
 			NamingException {
 		int result;
 		Connection conn = null;
@@ -140,7 +140,7 @@ public class DAO {
 	}
 
 
-	public static boolean remove(int id) throws NamingException, SQLException {
+	public static boolean Articleremove(int id) throws NamingException, SQLException {
 		int result;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -174,7 +174,150 @@ public class DAO {
 		return (result == 1);
 	}
 	
+	public static int getRecentMusicId() throws SQLException, NamingException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int id = 0;
+		DataSource ds = getDataSource();
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("SELECT * FROM musics ORDER BY id DESC LIMIT 1");
+			rs = stmt.executeQuery();
 
+			if (rs.next()) {
+				id = rs.getInt("id");
+			}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+		return id;
+	}
+	
+	public static Music findMusicById(int id) throws SQLException, NamingException {
+		Music music = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		DataSource ds = getDataSource();
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("SELECT * FROM musics WHERE id = ?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				music = new Music(rs.getInt("id"), rs.getString("instrument"),
+						rs.getString("musiccode"));
+			}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return music;
+	}	
+	
+	public static boolean Musiccreate(Music music) throws SQLException,
+			NamingException {
+		int result;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		DataSource ds = getDataSource();
+
+		try {
+			conn = ds.getConnection();
+			stmt = conn
+					.prepareStatement("INSERT INTO musics(instrument, musiccode) "
+							+ "VALUES(?, ?)");
+			stmt.setString(1, music.getInstrument());
+			stmt.setString(2, music.getMusiccode());
+			result = stmt.executeUpdate();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return (result == 1);
+	}
+	
+	public static boolean Musicremove(int id) throws NamingException, SQLException {
+		int result;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		DataSource ds = getDataSource();
+
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM musics WHERE id=");
+			stmt.setInt(1, id);
+			result = stmt.executeUpdate();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return (result == 1);
+	}
 	public static PageResult<Article> getPage(int page, int numItemsInPage)
 			throws SQLException, NamingException {
 		Connection conn = null;

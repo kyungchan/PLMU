@@ -34,7 +34,11 @@
 				</c:when>
 			</c:choose>
 			</div>
-			<input id="recoding" type="text" value="0" readonly>	
+			<form action="plmu" method="POST">
+				<input type="hidden" name="_method" value="recode" />
+				<input type="hidden" name="inst" value="${ inst }" />
+				<input id="recoding" name="musiccode" type="text" value="" readonly>	
+			</form>
 		</div>
 		<jsp:include page="share/footer.jsp"></jsp:include>
 	</div>

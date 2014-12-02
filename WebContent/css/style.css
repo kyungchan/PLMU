@@ -181,6 +181,13 @@ html{
 
 /* 공유게시판 */
 
+.divider {
+	width: 100%;
+	height: 1px;
+	background-color: black; 
+	margin: 5px 0;
+}
+
 #createbtn {
 	float: right;
 }

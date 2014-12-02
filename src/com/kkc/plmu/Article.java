@@ -20,6 +20,7 @@ public class Article implements java.io.Serializable{
 		this.context = context;
 		this.author = author;
 		this.timestamp = timestamp;
+		this.musicid = musicid;
 	}
 
 	public int getMusicid() {

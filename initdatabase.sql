@@ -18,16 +18,16 @@ CREATE TABLE articles (
 	author VARCHAR(20) NOT NULL,
 	time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	musicid INT,
-	CONSTRAINT FOREIGN KEY (musicid) REFERENCES musics(id)
+	CONSTRAINT FOREIGN KEY (musicid) REFERENCES musics(id) ON DELETE CASCADE
 );
 
 CREATE TABLE members (
 	userid INT AUTO_INCREMENT PRIMARY KEY,
-	email VARCHAR(15) NOT NULL UNIQUE,
+	email VARCHAR(50) NOT NULL UNIQUE,
 	pw VARCHAR(50) NOT NULL
 );
 
-INSERT INTO musics VALUES (1, 'piano', 'asdfasdf');
+INSERT INTO musics VALUES (1, 'piano', 'piano-3C,0.38|piano-3D,1.27|piano-3E,2.1|piano-3F,2.83|piano-3G,3.59|piano-3A,4.39|piano-3B,5.17|piano-3Ds,6.06|piano-3Fs,6.44|piano-3Gs,6.84|');
 INSERT INTO musics VALUES (2, 'piano', 'asdfasdf');
 INSERT INTO musics VALUES (3, 'piano', 'asdfasdf');
 INSERT INTO musics VALUES (4, 'piano', 'asdfasdf');

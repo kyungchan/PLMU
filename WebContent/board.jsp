@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<div class="centered">
 	<jsp:include page="share/header.jsp"></jsp:include>
 	<jsp:include page="share/nav.jsp"></jsp:include>
-	<div class="centered">
 		<div id="container">
 			<table class="table table-striped">
 				<thead>
@@ -36,7 +36,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="plmu?pg=create" id="createbtn" class="btn btn-default">글 작성</a>
+			<a href="plmu?pg=play" id="createbtn" class="btn btn-default">음악공유하기</a>
 					
 			<c:set var="currentPage" value="${articles.page}" />
 			<c:set var="url" value="plmu" />

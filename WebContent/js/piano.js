@@ -32,7 +32,13 @@ $(document).ready(function(){
 				} else {
 					$("a[data-action='recode']").attr('disabled', false);
 					recoding = false;
-					clearInterval(recodeTimer);
+					clearInterval(int);
+					if (confirm("녹음이 끝났습니다.\n공유하시겠습니까?")) {
+						$('form').submit();
+					} else {
+						$('#recoding').val("");
+						$('#recode-time').val(0);
+					}
 				}
 			}, 1);
 		}
