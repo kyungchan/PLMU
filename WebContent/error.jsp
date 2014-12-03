@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,14 @@
 	<jsp:include page="share/nav.jsp"></jsp:include>
 	<div class="centered">
 		<div id="container">
+		<c:choose>
+		<c:when test="${ok == 'ok'}">
+		<%
+			String id=request.getParameter("errormsg");
+   			response.sendRedirect("plmu?pg=show&id=" + id);
+		%> 
+		</c:when>
+		</c:choose>
 			${errormsg}<br>
 			<a href="plmu" class="btn btn-default">돌아가기</a>
 		</div>

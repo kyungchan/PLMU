@@ -70,13 +70,37 @@ public class PlmuServlet extends HttpServlet {
 				request.setAttribute("page", page);
 				request.setAttribute("current", "board");
 				actionUrl = "board.jsp";
+			} else if (pg.equals("update")) {
+				Article article = DAO.findArticleById(Integer.parseInt(request
+						.getParameter("id")));
+				request.setAttribute("article", article);
+				request.setAttribute("method", "update");
+				actionUrl = "create.jsp";
 			} else if (pg.equals("show")) {
 				Article article = DAO.findArticleById(Integer.parseInt(request.getParameter("id")));
 				Music music = DAO.findMusicById(article.getMusicid());
-				request.setAttribute("article", article);
-				request.setAttribute("music", music);
-				request.setAttribute("current", "board");
-				actionUrl = "show.jsp";
+				String like = request.getParameter("like");
+				if(like == null) {
+					request.setAttribute("article", article);
+					request.setAttribute("music", music);
+					request.setAttribute("current", "board");
+					actionUrl = "show.jsp";
+				} else {
+						if(like.equals("1")){
+							DAO.Articlelike(article);
+							request.setAttribute("redirect", "ok");
+							request.setAttribute("id", article.getId());
+						} else if(like.equals("0")){
+							DAO.Articledislike(article);
+							request.setAttribute("redirect", "ok");
+							request.setAttribute("id", article.getId());
+						}
+						request.setAttribute("article", article);
+						request.setAttribute("music", music);
+						request.setAttribute("current", "board");
+						actionUrl = "show.jsp";
+					}
+				
 			}
 		}catch (Exception e) {
 			actionUrl = "error.jsp";
@@ -131,6 +155,7 @@ public class PlmuServlet extends HttpServlet {
 			
 			try {
 				if(errorMsgs.isEmpty()){
+					int createdid = 0;
 					Article article = new Article();
 					Music music = new Music();
 					article.setTitle(title);
@@ -141,8 +166,10 @@ public class PlmuServlet extends HttpServlet {
 					if(request.getParameter("_method").equals("create")){
 						if(DAO.Musiccreate(music)){
 							article.setMusicid(DAO.getRecentMusicId());
-							if(DAO.Articlecreate(article)){
-								request.setAttribute("errormsg", "게시글 작성 성공");
+							createdid = DAO.Articlecreate(article);
+							if(createdid != 0){
+								request.setAttribute("errormsg", createdid);
+								request.setAttribute("ok", "ok");
 								actionUrl = "error.jsp";
 							} else {
 								request.setAttribute("errormsg", "게시글 작성 실패(게시글)");
@@ -157,6 +184,8 @@ public class PlmuServlet extends HttpServlet {
 						article.setId(Integer.parseInt(request.getParameter("id")));
 						if(DAO.Articleupdate(article)){
 							request.setAttribute("errormsg", "게시글 수정 성공");
+							request.setAttribute("ok", "ok");
+							request.setAttribute("id", article.getId());
 							actionUrl = "error.jsp";
 						} else {
 							request.setAttribute("errormsg", "게시글 수정 실패");

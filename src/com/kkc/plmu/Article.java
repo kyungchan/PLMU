@@ -7,20 +7,40 @@ public class Article implements java.io.Serializable{
 	private String context;
 	private String author;
 	private String timestamp;
+	private int likecount;
+	private int dislike;
 	private int musicid;
 	
 	public Article() {
 		
 	}
 
-	public Article(int id, String title, String context, String author, String timestamp, int musicid) {
+	public Article(int id, String title, String context, String author, String timestamp, int likecount, int dislike, int musicid) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.context = context;
 		this.author = author;
 		this.timestamp = timestamp;
+		this.likecount = likecount;
+		this.dislike = dislike;
 		this.musicid = musicid;
+	}
+
+	public int getLikecount() {
+		return likecount;
+	}
+
+	public void setLikecount(int likecount) {
+		this.likecount = likecount;
+	}
+
+	public int getDislike() {
+		return dislike;
+	}
+
+	public void setDislike(int dislike) {
+		this.dislike = dislike;
 	}
 
 	public int getMusicid() {

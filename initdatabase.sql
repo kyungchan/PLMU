@@ -17,6 +17,8 @@ CREATE TABLE articles (
 	context TEXT NOT NULL,
 	author VARCHAR(20) NOT NULL,
 	time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	likecount INT NOT NULL DEFAULT '0',
+	dislike INT NOT NULL DEFAULT '0',
 	musicid INT,
 	CONSTRAINT FOREIGN KEY (musicid) REFERENCES musics(id) ON DELETE CASCADE
 );
@@ -32,7 +34,7 @@ INSERT INTO musics VALUES (2, 'piano', 'asdfasdf');
 INSERT INTO musics VALUES (3, 'piano', 'asdfasdf');
 INSERT INTO musics VALUES (4, 'piano', 'asdfasdf');
 
-INSERT INTO articles VALUES (1, 'test1', 'test1111', 'a1', '2014-10-01 12:34:56', 1);
-INSERT INTO articles VALUES (2, 'test2', 'test2222', 'a2', '2014-10-02 12:34:56', 2);
-INSERT INTO articles VALUES (3, 'test3', 'test3333', 'a3', '2014-10-03 12:34:56', 3);
-INSERT INTO articles VALUES (4, 'test4', 'test4444', 'a4', '2014-10-04 12:34:56', 4);
+INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test1', 'test1111', 'a1', '2014-10-01 12:34:56', 1);
+INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test2', 'test2222', 'a2', '2014-10-02 12:34:56', 2);
+INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test3', 'test3333', 'a3', '2014-10-03 12:34:56', 3);
+INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test4', 'test4444', 'a4', '2014-10-04 12:34:56', 4);

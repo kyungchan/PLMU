@@ -38,7 +38,8 @@ public class DAO {
 			if (rs.next()) {
 				article = new Article(rs.getInt("id"), rs.getString("title"),
 						rs.getString("context"), rs.getString("author"),
-						rs.getString("time_stamp"), rs.getInt("musicid"));
+						rs.getString("time_stamp"), rs.getInt("likecount"), 
+						rs.getInt("dislike"), rs.getInt("musicid"));
 			}
 		} finally {
 			if (rs != null)
@@ -61,25 +62,34 @@ public class DAO {
 		return article;
 	}
 
-	public static boolean Articlecreate(Article article) throws SQLException,
+	public static int Articlecreate(Article article) throws SQLException,
 			NamingException {
-		int result;
+		int result = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
 		ResultSet rs = null;
 
 		DataSource ds = getDataSource();
 
 		try {
 			conn = ds.getConnection();
-			stmt = conn
-					.prepareStatement("INSERT INTO articles(title, context, author, musicid) "
+			stmt = conn.prepareStatement("INSERT INTO articles(title, context, author, musicid) "
 							+ "VALUES(?, ?, ?, ?)");
 			stmt.setString(1, article.getTitle());
 			stmt.setString(2, article.getContext());
 			stmt.setString(3, article.getAuthor());
 			stmt.setInt(4, article.getMusicid());
-			result = stmt.executeUpdate();
+			stmt.executeUpdate();
+			
+			stmt2 = conn.prepareStatement("SELECT * FROM articles WHERE author=? AND title=? ORDER BY id DESC LIMIT 1");
+			stmt2.setString(1, article.getAuthor());
+			stmt2.setString(2, article.getTitle());
+			rs = stmt2.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("id");
+			}
+			
 		} finally {
 			if (rs != null)
 				try {
@@ -98,7 +108,7 @@ public class DAO {
 				}
 		}
 
-		return (result == 1);
+		return result;
 	}
 	
 	public static boolean Articleupdate(Article article) throws SQLException,
@@ -139,7 +149,80 @@ public class DAO {
 		return (result == 1);
 	}
 
+	public static boolean Articlelike(Article article) throws SQLException,
+			NamingException {
+		int result;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 
+		DataSource ds = getDataSource();
+
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("UPDATE articles SET likecount=? WHERE id=?");
+			stmt.setInt(1, article.getLikecount() + 1);
+			stmt.setInt(2, article.getId());
+			result = stmt.executeUpdate();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return (result == 1);
+	}
+	
+
+	public static boolean Articledislike(Article article) throws SQLException,
+			NamingException {
+		int result;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		DataSource ds = getDataSource();
+
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("UPDATE articles SET dislike=? WHERE id=?");
+			stmt.setInt(1, article.getDislike() + 1);
+			stmt.setInt(2, article.getId());
+			result = stmt.executeUpdate();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return (result == 1);
+	}
+	
+	
 	public static boolean Articleremove(int id) throws NamingException, SQLException {
 		int result;
 		Connection conn = null;
@@ -357,7 +440,8 @@ public class DAO {
 				result.getList().add(
 						new Article(rs.getInt("id"), rs.getString("title"), rs
 								.getString("context"), rs.getString("author"),
-								rs.getString("time_stamp"), rs.getInt("musicid")));
+								rs.getString("time_stamp"),rs.getInt("likecount"),
+								rs.getInt("dislike"), rs.getInt("musicid")));
 			}
 		} finally {
 			// 무슨 일이 있어도 리소스를 제대로 종료

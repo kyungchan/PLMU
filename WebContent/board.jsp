@@ -21,17 +21,38 @@
 					<th>글번호</th>
 					<th>제목</th>
 					<th>작성자</th>
+					<th>좋아요</th>
+					<th>싫어요</th>
 					<th>작성일</th>
 				</thead>
 				<tbody>
 					<c:forEach var="articles" items="${articles.list }">
+						<c:choose>		
+							<c:when test="${articles.likecount - articles.dislike >= 3 && articles.likecount - articles.dislike <6}">
+								<c:set var="textcolor" value="#555555"/>
+							</c:when>
+							<c:when test="${articles.likecount - articles.dislike >= 6}">
+								<c:set var="textcolor" value="#000000"/>
+							</c:when>
+							<c:when test="${articles.likecount - articles.dislike <= -3  && articles.likecount - articles.dislike > -6}">
+								<c:set var="textcolor" value="#c7c7c7"/>
+							</c:when>
+							<c:when test="${articles.likecount - articles.dislike <= -6}">
+								<c:set var="textcolor" value="#ededed"/>
+							</c:when>
+							<c:otherwise>
+								<c:set var="textcolor" value="#8c8c8c"/>
+							</c:otherwise>
+						</c:choose>
 						<tr>
 							<td width='10%'><c:out value="${articles.id}" /></td>
-							<td width='50%'><a href="plmu?pg=show&id=${articles.id}">
+							<td width='48%'><a href="plmu?pg=show&id=${articles.id}" style="color:<c:out value="${textcolor}" />; font-weight:bold;">
 									<c:out value="${articles.title}" />
 							</a></td>
-							<td width='15%'><c:out value="${articles.author}" /></td>
-							<td width='25%'><c:out value="${articles.timestamp}" /></td>
+							<td width='10%'><c:out value="${articles.author}" /></td>
+							<td width='7%'><c:out value="${articles.likecount}" /></td>
+							<td width='7%'><c:out value="${articles.dislike}" /></td>
+							<td width='*'><c:out value="${articles.timestamp}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
