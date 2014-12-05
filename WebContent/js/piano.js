@@ -18,7 +18,7 @@ function play_string(keyname){
 $(document).ready(function(){		
 	$("a[data-action='recode']").click(function() {
 		if (confirm("확인을 누르면 녹음이 시작됩니다.\n녹음은 7초동안 진행됩니다.")) {
-			var sec = 0, ms = 0;
+			var sec = 0;
 			recoding = true;
 			$("a[data-action='recode']").attr('disabled', true);
 			var startTime = new Date().getTime();

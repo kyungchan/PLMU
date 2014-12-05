@@ -81,10 +81,6 @@ public class PlmuServlet extends HttpServlet {
 				Music music = DAO.findMusicById(article.getMusicid());
 				String like = request.getParameter("like");
 				if(like == null) {
-					request.setAttribute("article", article);
-					request.setAttribute("music", music);
-					request.setAttribute("current", "board");
-					actionUrl = "show.jsp";
 				} else {
 						if(like.equals("1")){
 							DAO.Articlelike(article);
@@ -95,11 +91,11 @@ public class PlmuServlet extends HttpServlet {
 							request.setAttribute("redirect", "ok");
 							request.setAttribute("id", article.getId());
 						}
-						request.setAttribute("article", article);
-						request.setAttribute("music", music);
-						request.setAttribute("current", "board");
-						actionUrl = "show.jsp";
 					}
+				request.setAttribute("article", article);
+				request.setAttribute("music", music);
+				request.setAttribute("current", "board");
+				actionUrl = "show.jsp";
 				
 			}
 		}catch (Exception e) {
@@ -168,7 +164,7 @@ public class PlmuServlet extends HttpServlet {
 							article.setMusicid(DAO.getRecentMusicId());
 							createdid = DAO.Articlecreate(article);
 							if(createdid != 0){
-								request.setAttribute("errormsg", createdid);
+								request.setAttribute("id", Integer.toString(createdid));
 								request.setAttribute("ok", "ok");
 								actionUrl = "error.jsp";
 							} else {

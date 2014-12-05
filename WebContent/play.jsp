@@ -19,28 +19,24 @@
 <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="centered">
-		<jsp:include page="share/header.jsp"></jsp:include>
-		<jsp:include page="share/nav.jsp"></jsp:include>
-		<div id="container">
-			<div id="instrument">
-			<div id="recoder">
-				<input id="recode-time" type="text" value="0" readonly>	
-				<a href="#" class="btn btn-default" data-action="recode" data-id="${ inst }">녹음하기</a>
-			</div>
-			<c:choose>
-				<c:when test="${inst == 'piano'}">
-					<jsp:include page="instrument/piano.jsp"></jsp:include>
-				</c:when>
-			</c:choose>
-			</div>
-			<form action="plmu" method="POST">
-				<input type="hidden" name="_method" value="recode" />
-				<input type="hidden" name="inst" value="${ inst }" />
-				<input id="recoding" name="musiccode" type="text" value="" readonly>	
-			</form>
+	<jsp:include page="share/header.jsp"></jsp:include>
+	<jsp:include page="share/nav.jsp"></jsp:include>
+	<div id="container">
+		<div id="instrument">
+		<div id="recoder">
+			<input id="recode-time" type="text" value="0" readonly>	
+			<a href="#" class="btn btn-default" data-action="recode" data-id="${ inst }">녹음하기</a>
 		</div>
-		<jsp:include page="share/footer.jsp"></jsp:include>
+		<c:if test="${inst == 'piano'}">
+			<jsp:include page="instrument/piano.jsp"></jsp:include>
+		</c:if>
+		</div>
+		<form action="plmu" method="POST">
+			<input type="hidden" name="_method" value="recode" />
+			<input type="hidden" name="inst" value="${ inst }" />
+			<input id="recoding" name="musiccode" type="text" value="" readonly>	
+		</form>
 	</div>
+	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>

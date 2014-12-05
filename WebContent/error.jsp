@@ -13,20 +13,17 @@
 <body>		
 	<jsp:include page="share/header.jsp"></jsp:include>
 	<jsp:include page="share/nav.jsp"></jsp:include>
-	<div class="centered">
-		<div id="container">
-		<c:choose>
-		<c:when test="${ok == 'ok'}">
-		<%
-			String id=request.getParameter("errormsg");
-   			response.sendRedirect("plmu?pg=show&id=" + id);
-		%> 
-		</c:when>
-		</c:choose>
-			${errormsg}<br>
-			<a href="plmu" class="btn btn-default">돌아가기</a>
-		</div>
-		<jsp:include page="share/footer.jsp"></jsp:include>
+	<div id="container">
+	<c:if test="${ok == 'ok'}">
+	
+	<%
+		String id=(String)request.getAttribute("id");
+  			response.sendRedirect("plmu?pg=show&id=" + id);
+	%> 
+	</c:if>
+		${errormsg}<br>
+		<a href="plmu" class="btn btn-default">홈으로</a>
 	</div>
+	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>
