@@ -23,7 +23,7 @@
 	<jsp:include page="share/nav.jsp"></jsp:include>
 	<div id="container">
 		<div id="instrument">
-		<div id="recoder">
+		<div id="recoder" class="center">
 			<input id="recode-time" type="text" value="0" readonly>	
 			<a href="#" class="btn btn-default" data-action="recode" data-id="${ inst }">녹음하기</a>
 		</div>
@@ -34,7 +34,7 @@
 		<form action="plmu" method="POST">
 			<input type="hidden" name="_method" value="recode" />
 			<input type="hidden" name="inst" value="${ inst }" />
-			<input id="recoding" name="musiccode" type="text" value="" readonly>	
+			<input type="hidden" id="recoding" name="musiccode" value="" readonly>	
 		</form>
 	</div>
 	<jsp:include page="share/footer.jsp"></jsp:include>

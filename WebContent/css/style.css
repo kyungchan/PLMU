@@ -31,6 +31,10 @@ html{
 	float: left;
 }
 
+#passwordbox{
+	
+}
+
 .hide{
 	display: none;
 }
@@ -104,6 +108,11 @@ html{
  
 #recoder{
 	
+}
+ 
+#playtime{
+	font-size: 18px;
+	width: 50px;
 }
  
 #recode-time{

@@ -1,4 +1,4 @@
-CREATE DATABASE plmudb DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+﻿CREATE DATABASE plmudb DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 GRANT ALL ON plmudb.* TO 'web'@'localhost' IDENTIFIED BY 'asdf';
 
@@ -20,6 +20,7 @@ CREATE TABLE articles (
 	likecount INT NOT NULL DEFAULT '0',
 	dislike INT NOT NULL DEFAULT '0',
 	musicid INT,
+	pw VARCHAR(255) NOT NULL,
 	CONSTRAINT FOREIGN KEY (musicid) REFERENCES musics(id) ON DELETE CASCADE
 );
 
@@ -29,12 +30,10 @@ CREATE TABLE members (
 	pw VARCHAR(50) NOT NULL
 );
 
-INSERT INTO musics VALUES (1, 'piano', 'piano-3C,0.38|piano-3D,1.27|piano-3E,2.1|piano-3F,2.83|piano-3G,3.59|piano-3A,4.39|piano-3B,5.17|piano-3Ds,6.06|piano-3Fs,6.44|piano-3Gs,6.84|');
-INSERT INTO musics VALUES (2, 'piano', 'asdfasdf');
-INSERT INTO musics VALUES (3, 'piano', 'asdfasdf');
-INSERT INTO musics VALUES (4, 'piano', 'asdfasdf');
+INSERT INTO musics VALUES (1, 'piano', 'piano-3C,0.66|piano-3D,1.06|piano-3E,1.44|piano-3F,1.88|piano-3G,2.27|piano-3A,2.68|piano-3B,3.05|piano-3B,4|piano-3A,4.46|piano-3G,4.82|piano-3F,5.23|piano-3E,5.64|piano-3D,6.01|piano-3C,6.38|');
+INSERT INTO musics VALUES (2, 'piano', 'piano-4G,0.36|piano-4G,0.68|piano-4A,1.06|piano-4A,1.46|piano-4G,1.83|piano-4G,2.19|piano-4E,2.57|piano-4G,3.29|piano-4G,3.65|piano-4E,3.99|piano-4E,4.32|piano-4D,4.73|piano-4G,5.94|piano-4G,6.27|piano-4A,6.56|piano-4A,6.87|');
+INSERT INTO musics VALUES (3, 'piano', 'piano-3C,0.42|piano-3D,0.79|piano-3E,1.2|piano-3E,1.63|piano-3C,2.01|piano-3E,2.4|piano-3G,2.79|piano-3A,3.04|piano-3G,3.32|piano-3C,3.76|piano-3D,4.16|piano-3E,4.58|piano-3E,4.93|piano-3C,5.33|piano-3D,5.68|piano-3G,6|piano-3A,6.26|piano-3G,6.54|');
 
-INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test1', 'test1111', 'a1', '2014-10-01 12:34:56', 1);
-INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test2', 'test2222', 'a2', '2014-10-02 12:34:56', 2);
-INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test3', 'test3333', 'a3', '2014-10-03 12:34:56', 3);
-INSERT INTO articles(title, context, author, time_stamp, musicid) VALUES ('test4', 'test4444', 'a4', '2014-10-04 12:34:56', 4);
+INSERT INTO articles(title, context, author, time_stamp, musicid, pw) VALUES ('test1', 'test11111', 'a1', '2014-10-01 12:34:56', 1, PASSWORD('test'));
+INSERT INTO articles(title, context, author, time_stamp, musicid, pw) VALUES ('test2', 'test22222', 'a2', '2014-10-02 12:34:56', 2, PASSWORD('test'));
+INSERT INTO articles(title, context, author, time_stamp, musicid, pw) VALUES ('test3', 'test33333', 'a3', '2014-10-03 12:34:56', 3, PASSWORD('test'));

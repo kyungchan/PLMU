@@ -7,6 +7,7 @@ public class Article implements java.io.Serializable{
 	private String context;
 	private String author;
 	private String timestamp;
+	private String pw;
 	private int likecount;
 	private int dislike;
 	private int musicid;
@@ -15,16 +16,25 @@ public class Article implements java.io.Serializable{
 		
 	}
 
-	public Article(int id, String title, String context, String author, String timestamp, int likecount, int dislike, int musicid) {
+	public Article(int id, String title, String context, String author, String timestamp, String pw, int likecount, int dislike, int musicid) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.context = context;
 		this.author = author;
 		this.timestamp = timestamp;
+		this.pw = pw;
 		this.likecount = likecount;
 		this.dislike = dislike;
 		this.musicid = musicid;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
 	public int getLikecount() {

@@ -75,7 +75,28 @@ public class PlmuServlet extends HttpServlet {
 						.getParameter("id")));
 				request.setAttribute("article", article);
 				request.setAttribute("method", "update");
+				request.setAttribute("password", request.getParameter("password"));
+				request.setAttribute("current", "board");
 				actionUrl = "create.jsp";
+			} else if (pg.equals("delete")) {
+				String password1 = request.getParameter("password");
+				String result = DAO.CheckPassword(password1, Integer.parseInt(request.getParameter("id")), true);
+				if(result != null ){
+					if (DAO.Articleremove(Integer.parseInt(request.getParameter("id"))) && DAO.Musicremove(Integer.parseInt(request.getParameter("id")))) {
+						request.setAttribute("errormsg", "게시글 삭제 성공.");
+						actionUrl = "error.jsp";
+					} else {
+						request.setAttribute("errormsg", "게시글 삭제 실패.");
+						actionUrl = "error.jsp";
+					}
+				} else {
+					request.setAttribute("errormsg", "게시글 삭제 실패(암호 비교 인증 실패)");
+					actionUrl = "error.jsp";
+				} 
+			} else if (pg.equals("password")) {
+				request.setAttribute("id", request.getParameter("id"));
+				request.setAttribute("action", request.getParameter("action"));
+				actionUrl = "password.jsp";
 			} else if (pg.equals("show")) {
 				Article article = DAO.findArticleById(Integer.parseInt(request.getParameter("id")));
 				Music music = DAO.findMusicById(article.getMusicid());
@@ -125,72 +146,100 @@ public class PlmuServlet extends HttpServlet {
 			request.setAttribute("method", "create");
 			request.setAttribute("current", "play");
 			actionUrl = "create.jsp";
-			errorMsgs.add("rse");
 		} else {
-			
-			String title = request.getParameter("title");
-			String context = request.getParameter("context");
-			String author = request.getParameter("author");
-			
-		
-			if (title == null || title.trim().length() == 0) {
-				errorMsgs.add("제목을 입력해주세요.");
-				title = null;
-			}
-	
-			if (context == null || context.trim().length() == 0) {
-				errorMsgs.add("내용을 입력해주세요.");
-				context = null;
-			}
-			
-			if (author == null || author.trim().length() == 0) {
-				errorMsgs.add("작성자를 입력해주세요.");
-				author = null;
-			}
-			
-			
 			try {
-				if(errorMsgs.isEmpty()){
-					int createdid = 0;
-					Article article = new Article();
-					Music music = new Music();
-					article.setTitle(title);
-					article.setContext(context);
-					article.setAuthor(author);
-					music.setInstrument(request.getParameter("inst"));
-					music.setMusiccode(request.getParameter("musiccode"));
-					if(request.getParameter("_method").equals("create")){
-						if(DAO.Musiccreate(music)){
-							article.setMusicid(DAO.getRecentMusicId());
-							createdid = DAO.Articlecreate(article);
-							if(createdid != 0){
-								request.setAttribute("id", Integer.toString(createdid));
-								request.setAttribute("ok", "ok");
-								actionUrl = "error.jsp";
-							} else {
-								request.setAttribute("errormsg", "게시글 작성 실패(게시글)");
-								DAO.Musicremove(DAO.getRecentMusicId()); // Article이 등록실패하면 Music은 쓸모가 없어지므로
-								actionUrl = "error.jsp";
-							}
-						} else {
-							request.setAttribute("errormsg", "게시글 작성 실패(음악)");
-							actionUrl = "error.jsp";
-						}
-					} else if(request.getParameter("_method").equals("update")){
-						article.setId(Integer.parseInt(request.getParameter("id")));
-						if(DAO.Articleupdate(article)){
-							request.setAttribute("errormsg", "게시글 수정 성공");
-							request.setAttribute("ok", "ok");
-							request.setAttribute("id", article.getId());
-							actionUrl = "error.jsp";
-						} else {
-							request.setAttribute("errormsg", "게시글 수정 실패");
-							actionUrl = "error.jsp";
-						}
+				if(request.getParameter("_method").equals("auth")){
+					String id = request.getParameter("id");
+					String action = request.getParameter("action");
+					String password = request.getParameter("password");
+					String result = DAO.CheckPassword(password, Integer.parseInt(id), false);
+					if(result != null){
+						request.setAttribute("auth", "ok");
+						request.setAttribute("id", id);
+						request.setAttribute("password", result);
+						request.setAttribute("action", action);
+						actionUrl = "error.jsp";
+					} else {
+						request.setAttribute("errormsg", "암호가 틀렸습니다.");
+						actionUrl = "error.jsp";
 					}
 				} else {
-					request.setAttribute("errormsg", errorMsgs);
-					actionUrl = "error.jsp";
+					String title = request.getParameter("title");
+					String context = request.getParameter("context");
+					String author = request.getParameter("author");
+					String password = request.getParameter("password");
+					
+				
+					if (title == null || title.trim().length() == 0) {
+						errorMsgs.add("제목을 입력해주세요.");
+						title = null;
+					}
+			
+					if (context == null || context.trim().length() == 0) {
+						errorMsgs.add("내용을 입력해주세요.");
+						context = null;
+					}
+		
+					if (author == null || author.trim().length() == 0) {
+						errorMsgs.add("작성자를 입력해주세요.");
+						author = null;
+					}
+					
+					if ((password == null || password.trim().length() == 0 || password.trim().length() > 16) && request.getParameter("_method").equals("create")) {
+						errorMsgs.add("비밀번호를 확인해주세요.");
+						password = null;
+					}
+				
+					if(errorMsgs.isEmpty()){
+						int createdid = 0;
+						Article article = new Article();
+						Music music = new Music();
+						article.setTitle(title);
+						article.setContext(context);
+						article.setAuthor(author);
+						article.setPw(password);
+						music.setInstrument(request.getParameter("inst"));
+						music.setMusiccode(request.getParameter("musiccode"));
+						if(request.getParameter("_method").equals("create")){
+							if(DAO.Musiccreate(music)){
+								article.setMusicid(DAO.getRecentMusicId());
+								createdid = DAO.Articlecreate(article);
+								if(createdid != 0){
+									request.setAttribute("id", createdid);
+									request.setAttribute("ok", "ok");
+									actionUrl = "error.jsp";
+								} else {
+									request.setAttribute("errormsg", "게시글 작성 실패(게시글)");
+									DAO.Musicremove(DAO.getRecentMusicId()); // Article이 등록실패하면 Music은 쓸모가 없어지므로
+									actionUrl = "error.jsp";
+								}
+							} else {
+								request.setAttribute("errormsg", "게시글 작성 실패(음악)");
+								actionUrl = "error.jsp";
+							}
+						} else if(request.getParameter("_method").equals("update")){
+							String password1 = request.getParameter("password");
+							String result = DAO.CheckPassword(password1, Integer.parseInt(request.getParameter("id")), true);
+							if(result != null ){
+								article.setId(Integer.parseInt(request.getParameter("id")));
+								if(DAO.Articleupdate(article)){
+									request.setAttribute("errormsg", "게시글 수정 성공");
+									request.setAttribute("ok", "ok");
+									request.setAttribute("id", article.getId());
+									actionUrl = "error.jsp";
+								} else {
+									request.setAttribute("errormsg", "게시글 수정 실패");
+									actionUrl = "error.jsp";
+								}
+							} else {
+								request.setAttribute("errormsg", "게시글 수정 실패(암호 비교 인증 실패)");
+								actionUrl = "error.jsp";
+							} 
+						}
+					} else {
+						request.setAttribute("errormsg", errorMsgs);
+						actionUrl = "error.jsp";
+					}
 				}
 			} catch (SQLException | NamingException e) {
 				errorMsgs.add(e.getMessage());

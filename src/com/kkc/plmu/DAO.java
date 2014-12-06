@@ -38,7 +38,7 @@ public class DAO {
 			if (rs.next()) {
 				article = new Article(rs.getInt("id"), rs.getString("title"),
 						rs.getString("context"), rs.getString("author"),
-						rs.getString("time_stamp"), rs.getInt("likecount"), 
+						rs.getString("time_stamp"), rs.getString("pw"), rs.getInt("likecount"), 
 						rs.getInt("dislike"), rs.getInt("musicid"));
 			}
 		} finally {
@@ -74,12 +74,13 @@ public class DAO {
 
 		try {
 			conn = ds.getConnection();
-			stmt = conn.prepareStatement("INSERT INTO articles(title, context, author, musicid) "
-							+ "VALUES(?, ?, ?, ?)");
+			stmt = conn.prepareStatement("INSERT INTO articles(title, context, author, musicid, pw) "
+							+ "VALUES(?, ?, ?, ?, PASSWORD(?))");
 			stmt.setString(1, article.getTitle());
 			stmt.setString(2, article.getContext());
 			stmt.setString(3, article.getAuthor());
 			stmt.setInt(4, article.getMusicid());
+			stmt.setString(5, article.getPw());
 			stmt.executeUpdate();
 			
 			stmt2 = conn.prepareStatement("SELECT * FROM articles WHERE author=? AND title=? ORDER BY id DESC LIMIT 1");
@@ -378,7 +379,7 @@ public class DAO {
 
 		try {
 			conn = ds.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM musics WHERE id=");
+			stmt = conn.prepareStatement("DELETE FROM musics WHERE id=?");
 			stmt.setInt(1, id);
 			result = stmt.executeUpdate();
 		} finally {
@@ -401,6 +402,53 @@ public class DAO {
 
 		return (result == 1);
 	}
+	
+	public static String CheckPassword(String pwinput, int id, Boolean encryption) throws SQLException, NamingException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		DataSource ds = getDataSource();
+		String result = null;
+		try {
+			conn = ds.getConnection();
+			if(encryption == false){
+				stmt = conn.prepareStatement("SELECT COUNT(title), pw FROM articles WHERE id=? AND pw=PASSWORD(?)");
+			} else {
+				stmt = conn.prepareStatement("SELECT COUNT(title), pw FROM articles WHERE id=? AND pw=?");
+			}
+			stmt.setInt(1, id);
+			stmt.setString(2, pwinput);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				if(rs.getInt(1) == 1){			
+					if(encryption == false){
+						result = rs.getString(2);
+					} else {
+						result = "ok";
+					}
+				}
+			}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (stmt != null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+		return result;
+	}	
+	
 	public static PageResult<Article> getPage(int page, int numItemsInPage)
 			throws SQLException, NamingException {
 		Connection conn = null;
@@ -440,7 +488,7 @@ public class DAO {
 				result.getList().add(
 						new Article(rs.getInt("id"), rs.getString("title"), rs
 								.getString("context"), rs.getString("author"),
-								rs.getString("time_stamp"),rs.getInt("likecount"),
+								rs.getString("time_stamp"), rs.getString("pw"),rs.getInt("likecount"),
 								rs.getInt("dislike"), rs.getInt("musicid")));
 			}
 		} finally {

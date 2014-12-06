@@ -45,10 +45,10 @@
 					</c:choose>
 					<tr>
 						<td width='10%'><c:out value="${articles.id}" /></td>
-						<td width='48%'><a href="plmu?pg=show&id=${articles.id}" style="color:<c:out value="${textcolor}" />; font-weight:bold;">
+						<td width='45%'><a href="plmu?pg=show&id=${articles.id}" style="color:<c:out value="${textcolor}" />; font-weight:bold;">
 								<c:out value="${articles.title}" />
 						</a></td>
-						<td width='10%'><c:out value="${articles.author}" /></td>
+						<td width='13%'><c:out value="${articles.author}" /></td>
 						<td width='7%'><c:out value="${articles.likecount}" /></td>
 						<td width='7%'><c:out value="${articles.dislike}" /></td>
 						<td width='*'><c:out value="${articles.timestamp}" /></td>

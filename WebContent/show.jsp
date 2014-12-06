@@ -16,7 +16,7 @@
 	$(function() {
 		$("a[data-action='delete']").click(function() {
 			if (confirm("정말로 삭제하시겠습니까?")) {
-				location = 'plmu?pg=delete&id=' + $(this).attr('data-id');
+				location = 'plmu?pg=password&id=' + $(this).attr('data-id') + "&action=delete";
 			}
 			return false;
 		});
@@ -41,7 +41,7 @@
 		<div class="divider"></div>
 		<div>좋아요 : ${article.likecount} 싫어요 : ${article.dislike}</div>
 		<div class="divider"></div>
-		<div>${article.context}<br>${ music.musiccode }</div>
+		<div>${article.context}</div>
 		<div class="center">
 			<a id="play_btn" href="#" class="btn btn-default">▶</a>
 			<input id="playtime" type="text" value="0" readonly>	
@@ -50,7 +50,7 @@
 		<div class="right">
 			<a href="plmu?pg=show&id=${article.id}&like=1" class="btn btn-default">좋아요</a>
 			<a href="plmu?pg=show&id=${article.id}&like=0" class="btn btn-default">싫어요</a>
-			<a href="plmu?pg=update&id=${article.id}" class="btn btn-default">글수정</a>
+			<a href="plmu?pg=password&id=${article.id}&action=update" class="btn btn-default">글수정</a>
 			<a href="#" class="btn btn-default" data-action="delete" data-id="${article.id}">글삭제</a>
 		</div>
 	</div>
