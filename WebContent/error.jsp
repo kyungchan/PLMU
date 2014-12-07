@@ -14,31 +14,32 @@
 	<jsp:include page="share/header.jsp"></jsp:include>
 	<jsp:include page="share/nav.jsp"></jsp:include>
 	<div id="container" class="center">	
-		<c:if test="${ok == 'ok'}">
-		<%
-			String id=request.getAttribute("id").toString();
-	  		response.sendRedirect("plmu?pg=show&id=" + id);
-		%> 
-		</c:if>
-		<c:if test="${auth == 'ok'}">
-		<%
-			String id=request.getAttribute("id").toString();
-			String action=request.getAttribute("action").toString();
-			String password=request.getAttribute("password").toString();
+	<c:if test="${ok == 'ok'}">
+	<%
+		String id=request.getAttribute("id").toString();
+  		response.sendRedirect("plmu?pg=show&id=" + id);
+	%> 
+	</c:if>
+	<c:if test="${auth == 'ok'}">
+	<%
+		String id=request.getAttribute("id").toString();
+		String action=request.getAttribute("action").toString();
+		String password=request.getAttribute("password").toString();
+		if(action.equals("update")){
 			request.setAttribute("password", password);
-			if(action.equals("update")){
-	  			response.sendRedirect("plmu?pg=update&id=" + id);
-			} else if (action.equals("delete")){
-		  		response.sendRedirect("plmu?pg=delete&id=" + id + "&password=" + password);
-			}
-		%> 
-		</c:if>
-		<div class="alert alert-danger" role="alert">
-		  <span class="sr-only">Error:</span>
-		  ${errormsg}<br>
-		</div>
-		<a href="plmu" class="btn btn-default">홈으로</a>
+	  		response.sendRedirect("plmu?pg=update&id=" + id);
+		} else if (action.equals("delete")){
+	  		response.sendRedirect("plmu?pg=delete&id=" + id + "&password=" + password);
+		}
+	%> 
+	</c:if>
+	<div class="alert alert-danger" role="alert">
+	  <span class="sr-only">Error:</span>
+	  ${errormsg}<br>
 	</div>
+	<a href="plmu" class="btn btn-default">홈으로</a>
+	</div>
+	<input type="text" name="password" value="${password}" />
 	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>

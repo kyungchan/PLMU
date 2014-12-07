@@ -54,6 +54,7 @@
 			<a href="#" class="btn btn-default" data-action="delete" data-id="${article.id}">글삭제</a>
 		</div>
 	</div>
+	<jsp:include page="share/footer.jsp"></jsp:include>
 	
 <div class="hide">
 <c:if test="${ music.instrument == 'piano' }">
