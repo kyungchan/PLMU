@@ -90,7 +90,7 @@ public class PlmuServlet extends HttpServlet {
 						actionUrl = "error.jsp";
 					}
 				} else {
-					request.setAttribute("errormsg", "게시글 삭제 실패(암호 비교 인증 실패)" + result + password1 + request.getParameter("id"));
+					request.setAttribute("errormsg", "게시글 삭제 실패(암호 비교 인증 실패)");
 					actionUrl = "error.jsp";
 				} 
 			} else if (pg.equals("password")) {
