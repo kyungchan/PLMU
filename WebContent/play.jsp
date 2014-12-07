@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>PLMU :: 악기연주</title>
+<link rel="icon" type="image/png"  href="img/icon.png"/>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-2.1.1.min.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">

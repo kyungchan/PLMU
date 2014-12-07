@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title><c:choose><c:when test="${method == 'update'}">PLMU :: 글 수정</c:when><c:otherwise>PLMU :: 글 작성</c:otherwise></c:choose></title>
+<link rel="icon" type="image/png"  href="img/icon.png"/>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="js/bootstrap.min.js"></script>

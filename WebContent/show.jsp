@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>PLMU :: ${article.title}</title>
 <script src="js/jquery-2.1.1.min.js"></script>
+<link rel="icon" type="image/png"  href="img/icon.png"/>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/style.css">

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>PLMU :: 알림</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="icon" type="image/png"  href="img/icon.png"/>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="js/bootstrap.min.js"></script>
 </head>
