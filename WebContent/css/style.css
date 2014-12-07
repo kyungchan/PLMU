@@ -121,6 +121,14 @@ html{
 }
 
 
+#drum{
+	padding-top:90px;
+	margin-bottom: 20px;
+	width: 960px;
+	height: 200px;
+	border: 1px solid grey;
+}
+
 /* 피아노 CSS부분  */
 #piano{
 	width: 960px;

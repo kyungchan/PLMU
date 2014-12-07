@@ -58,8 +58,8 @@ public class PlmuServlet extends HttpServlet {
 				String inst = request.getParameter("inst");
 				if(inst == null || inst.equals("piano")){
 					request.setAttribute("inst", "piano");
-				} else {
-					request.setAttribute("inst", "piano");
+				} else if(inst.equals("drum")) {
+					request.setAttribute("inst", "drum");
 				}
 				actionUrl = "play.jsp";
 				request.setAttribute("current", "play");

@@ -170,6 +170,34 @@
 		<source src="audio/piano/5B.mp3" type="audio/mpeg"></source>
 	</audio>
 </c:if>
+<c:if test="${ music.instrument == 'drum' }">
+<div class="hide">
+	<audio id="drum-base" preload="auto" controls>
+		<source src="audio/drum/base.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-crash" preload="auto" controls>
+		<source src="audio/drum/crash.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-floor" preload="auto" controls>
+		<source src="audio/drum/floor.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-hihat" preload="auto" controls>
+		<source src="audio/drum/hihat.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-l_tom" preload="auto" controls>
+		<source src="audio/drum/L_tom.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-ride" preload="auto" controls>
+		<source src="audio/drum/ride.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-s_tom" preload="auto" controls>
+		<source src="audio/drum/S_tom.mp3" type="audio/mpeg"></source>
+	</audio>
+	<audio id="drum-snare" preload="auto" controls>
+		<source src="audio/drum/snare.mp3" type="audio/mpeg"></source>
+	</audio>
+</div>
+</c:if>
 </div>
 
 	
