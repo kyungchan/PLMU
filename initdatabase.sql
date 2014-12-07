@@ -1,4 +1,4 @@
-﻿CREATE DATABASE plmudb DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE plmudb DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 GRANT ALL ON plmudb.* TO 'web'@'localhost' IDENTIFIED BY 'asdf';
 
@@ -22,12 +22,6 @@ CREATE TABLE articles (
 	musicid INT,
 	pw VARCHAR(255) NOT NULL,
 	CONSTRAINT FOREIGN KEY (musicid) REFERENCES musics(id) ON DELETE CASCADE
-);
-
-CREATE TABLE members (
-	userid INT AUTO_INCREMENT PRIMARY KEY,
-	email VARCHAR(50) NOT NULL UNIQUE,
-	pw VARCHAR(50) NOT NULL
 );
 
 INSERT INTO musics VALUES (1, 'piano', 'piano-3C,0.66|piano-3D,1.06|piano-3E,1.44|piano-3F,1.88|piano-3G,2.27|piano-3A,2.68|piano-3B,3.05|piano-3B,4|piano-3A,4.46|piano-3G,4.82|piano-3F,5.23|piano-3E,5.64|piano-3D,6.01|piano-3C,6.38|');

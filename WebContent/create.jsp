@@ -19,7 +19,9 @@
 			<input type="hidden" name="inst" value="${inst}" />
 			<input type="hidden" name="musiccode" value="${musiccode}" />
 			<input type="hidden" name="id" value="${article.id}" />
+			<c:if test="${ method == 'update' }">
 			<input type="hidden" name="password" value="${password}" />
+			</c:if>
 		 	<label for="inputTitle" class="col-sm-2 control-label">제목</label>
 			<input type="text" id="inputTitle" class="form-control" name="title" value="${article.title}"></input>
 		 	<label for="inputAuthor" class="col-sm-2 control-label">작성자</label>

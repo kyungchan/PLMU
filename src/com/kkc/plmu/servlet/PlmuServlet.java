@@ -185,7 +185,7 @@ public class PlmuServlet extends HttpServlet {
 						author = null;
 					}
 					
-					if ((password == null || password.trim().length() == 0 || password.trim().length() > 16) && request.getParameter("_method").equals("create")) {
+					if ((password == null || password.trim().length() == 0) && request.getParameter("_method").equals("create")) {
 						errorMsgs.add("비밀번호를 확인해주세요.");
 						password = null;
 					}

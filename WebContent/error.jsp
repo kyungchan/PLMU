@@ -26,7 +26,7 @@
 		String action=request.getAttribute("action").toString();
 		String password=request.getAttribute("password").toString();
 		if(action.equals("update")){
-			request.setAttribute("password", password);
+			session.setAttribute("password", password);
 	  		response.sendRedirect("plmu?pg=update&id=" + id);
 		} else if (action.equals("delete")){
 	  		response.sendRedirect("plmu?pg=delete&id=" + id + "&password=" + password);
@@ -39,7 +39,6 @@
 	</div>
 	<a href="plmu" class="btn btn-default">홈으로</a>
 	</div>
-	<input type="text" name="password" value="${password}" />
 	<jsp:include page="share/footer.jsp"></jsp:include>
 </body>
 </html>
